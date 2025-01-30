@@ -73,13 +73,8 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="hover:text-primary">
+                <Link href="/products" className="hover:text-primary">
                   สินค้า
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="hover:text-primary">
-                  โปรโมชั่น
                 </Link>
               </li>
               <li>
