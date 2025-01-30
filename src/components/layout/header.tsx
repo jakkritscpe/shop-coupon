@@ -63,7 +63,7 @@ const Header = () => {
               className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-4"
             >
               <li>
-          <Link href="/#" className="hover:text-primary" onClick={() => (document.activeElement as HTMLElement)?.blur()}>
+          <Link href="/" className="hover:text-primary" onClick={() => (document.activeElement as HTMLElement)?.blur()}>
             หน้าหลัก
           </Link>
               </li>
