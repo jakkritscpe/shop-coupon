@@ -20,7 +20,8 @@ export async function createCheckoutSession({ priceId }: { priceId: string }) {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:3000/payment-success",
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success`,
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
   })
 
   redirect(session.url!)

@@ -21,11 +21,17 @@ export function ProductListThumbnail({
           className="object-cover w-full h-48"
         />
       </figure>
-      
+
       <div className="card-body">
-        <h2 className="card-title"><Image src="/coupon.svg" alt="Line" width={40} height={40} /> {product.name}</h2>
-        <p className="text-muted-foreground">{product.price.display_amount}</p>
-        <div className="card-actions justify-end">
+        <h2 className="card-title">
+          {/* <Image src="/coupon.svg" alt="Line" width={40} height={40} />{" "} */}
+          {product.name}
+        </h2>
+        <p className="text-muted-foreground mb-4">{product.description}</p>
+        <div className="card-actions justify-between">
+          <p className="text-muted-foreground">
+            {product.price.display_amount}
+          </p>
           <ProductBuyForm priceId={product.price.id} />
         </div>
       </div>

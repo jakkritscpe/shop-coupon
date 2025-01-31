@@ -1,12 +1,15 @@
-import { ProductListThumbnail, ProductListThumbnailSkeleton } from "@/components/ui/product/product-list-thumbnail"
-import type { productListSchema } from "@/lib/schema"
+import {
+  ProductListThumbnail,
+  ProductListThumbnailSkeleton,
+} from "@/components/ui/product/product-list-thumbnail";
+import type { productListSchema } from "@/lib/schema";
 // import Link from "next/link"
-import type { z } from "zod"
+import type { z } from "zod";
 
 export function ProductList({
   list,
 }: {
-  list: z.infer<typeof productListSchema>
+  list: z.infer<typeof productListSchema>;
 }) {
   return (
     <div className="relative mb-8 flex flex-col items-center gap-8">
@@ -30,16 +33,27 @@ export function ProductList({
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 text-center text-sm">
             <div className="font-medium">No products found.</div>
-            <div className="text-muted-foreground mb-4">Add products to your store to get started.</div>
+            <div className="text-muted-foreground mb-4">
+              Add products to your store to get started.
+            </div>
             {/* <Button asChild size="sm" variant="outline">
               <a href="https://dashboard.stripe.com/test/products" target="_blank" rel="noreferrer">
                 Add Product
               </a>
             </Button> */}
+            <button className="btn">
+              {" "}
+              <a
+                href="https://dashboard.stripe.com/test/products"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Add Product
+              </a>
+            </button>
           </div>
         </>
       )}
     </div>
-  )
+  );
 }
-

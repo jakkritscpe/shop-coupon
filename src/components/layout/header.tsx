@@ -29,12 +29,7 @@ const Header = () => {
           <ul className="menu menu-horizontal gap-2">
             <li>
               <Link href="/" className="hover:text-primary">
-                หน้าหลัก
-              </Link>
-            </li>
-            <li>
-              <Link href="/products" className="hover:text-primary">
-                สินค้า
+                สินค้าและบริการ
               </Link>
             </li>
             <li>
@@ -86,16 +81,7 @@ const Header = () => {
                     className="hover:text-primary"
                     onClick={closeMenu}
                   >
-                    หน้าหลัก
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products"
-                    className="hover:text-primary"
-                    onClick={closeMenu}
-                  >
-                    สินค้า
+                    สินค้าและบริการ
                   </Link>
                 </li>
                 <li>

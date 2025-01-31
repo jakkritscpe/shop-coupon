@@ -8,12 +8,9 @@ export function ProductBuyForm({ priceId }: { priceId: string }) {
   return (
     <form action={formAction}>
       <input type="hidden" name="priceId" value={priceId} />
-      {/* <Button type="submit" size="sm" disabled={isPending}>
-        {isPending ? "Please wait" : "Buy Now"}
-      </Button> */}
 
       <button type="submit"  className="btn btn-sm rounded-full font-normal text-[14px] px-6" disabled={isPending}>
-        {isPending ? "Please wait" : "ซื้อตอนนี้"}
+        {isPending ? "Please wait" : "ซื้อเลย"}
       </button>
     </form>
   );
