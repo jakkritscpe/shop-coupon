@@ -32,10 +32,10 @@ export function ProductListThumbnail({
       </figure>
 
       <div className="card-body">
-        <h2 className="card-title">{product.name}</h2>
-        <p className="text-muted-foreground mb-4">{product.description}</p>
+        <h2 className={`card-title ${ !validate && "text-gray-300" }`}>{product.name}</h2>
+        <p className={`text-muted-foreground mb-4 ${ !validate && "text-gray-300" }`}>{product.description}</p>
         <div className="card-actions justify-between">
-          <p className="text-muted-foreground">
+          <p className={`text-muted-foreground ${ !validate && "text-gray-300" }`}>
             {product.price.display_amount}
           </p>
           <ProductBuyForm priceId={product.price.id} />
