@@ -2,14 +2,21 @@
 
 import { checkoutAction } from "@/lib/actions";
 import { useActionState } from "react";
+import { 
+  useCodeStore, 
+  useValidateCodeStore,
+} from "@/store/codeStore";
 
 export function ProductBuyForm({ priceId }: { priceId: string }) {
   const [, formAction, isPending] = useActionState(checkoutAction, null);
+  const { code } = useCodeStore();
+  const { validate } = useValidateCodeStore();
+
   return (
     <form action={formAction}>
       <input type="hidden" name="priceId" value={priceId} />
-
-      <button type="submit"  className="btn btn-sm rounded-full font-normal text-[14px] px-6" disabled={isPending}>
+      <input type="hidden" name="code" value={code} />
+      <button type="submit"  className={`btn btn-sm rounded-full font-normal text-[14px] px-6`} disabled={isPending || !validate} >
         {isPending ? "Please wait" : "ซื้อเลย"}
       </button>
     </form>

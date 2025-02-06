@@ -3,7 +3,6 @@ import {
   ProductListThumbnailSkeleton,
 } from "@/components/ui/product/product-list-thumbnail";
 import type { productListSchema } from "@/lib/schema";
-// import Link from "next/link"
 import type { z } from "zod";
 
 export function ProductList({
