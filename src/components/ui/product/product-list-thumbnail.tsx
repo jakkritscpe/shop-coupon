@@ -18,7 +18,7 @@ export function ProductListThumbnail({
   return (
     <div
       className={`card card-compact bg-base-100 shadow-xl transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 ${
-        !validate && "grayscale cursor-not-allowed"
+        !validate && "cursor-not-allowed"
       }`}
     >
       <figure>
@@ -32,10 +32,10 @@ export function ProductListThumbnail({
       </figure>
 
       <div className="card-body">
-        <h2 className={`card-title ${ !validate && "text-gray-300" }`}>{product.name}</h2>
-        <p className={`text-muted-foreground mb-4 ${ !validate && "text-gray-300" }`}>{product.description}</p>
+        <h2 className={`card-title ${ !validate && "text-gray-400" }`}>{product.name}</h2>
+        <p className={`text-muted-foreground mb-4 ${ !validate && "text-gray-400" }`}>{product.description}</p>
         <div className="card-actions justify-between">
-          <p className={`text-muted-foreground ${ !validate && "text-gray-300" }`}>
+          <p className={`text-muted-foreground ${ !validate && "text-gray-400" }`}>
             {product.price.display_amount}
           </p>
           <ProductBuyForm priceId={product.price.id} />
