@@ -1,5 +1,8 @@
+"use client"
+
 import React from "react";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 const SignInPage = () => {
   return (
@@ -10,7 +13,7 @@ const SignInPage = () => {
           Please sign in with your Google account to continue.
         </p>
         <button
-        //   onClick={() => signIn('google')}
+          onClick={() => signIn('google')}
           className="btn w-full"
         >
           <Image src="/google.svg" alt="Instagram" width={20} height={20} />

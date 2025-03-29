@@ -1,9 +1,45 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
 
 export default function Footer() {
+  const [facebook, setFacebook] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [line, setLine] = useState("");
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const res = await axios.get(`/api/link-contact`);
+        const linkContacts = res.data.linkContacts;
+
+        if (!linkContacts) {
+          console.log("No content found");
+          return;
+        }
+
+        linkContacts.forEach((item: { name: string; link: string }) => {
+          if (item.name === "facebook") {
+            setFacebook(item.link);
+          }
+          if (item.name === "instagram") {
+            setInstagram(item.link);
+          }
+          if (item.name === "line") {
+            setLine(item.link);
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchConfig();
+  }, []);
+
   return (
     <footer className="footer p-10 bg-base-200 text-base-content">
       {/* Section 1: About & Contact */}
@@ -40,15 +76,31 @@ export default function Footer() {
       <div>
         <span className="footer-title">ติดตามเรา</span>
         <div className="flex space-x-4">
-          <Link href="https://www.facebook.com" aria-label="Facebook">
-            <Image src="/facebook.svg" alt="Facebook" width={35} height={35} />
-          </Link>
-          <Link href="https://www.instagram.com" aria-label="Instagram">
-            <Image src="/instagram.svg" alt="Instagram" width={35} height={35} />
-          </Link>
-          <Link href="https://line.me" aria-label="Line">
-            <Image src="/line.svg" alt="Line" width={35} height={35} />
-          </Link>
+          {facebook && (
+            <Link href={facebook} aria-label="Facebook">
+              <Image
+                src="/facebook.svg"
+                alt="Facebook"
+                width={35}
+                height={35}
+              />
+            </Link>
+          )}
+          {instagram && (
+            <Link href={instagram} aria-label="Instagram">
+              <Image
+                src="/instagram.svg"
+                alt="Instagram"
+                width={35}
+                height={35}
+              />
+            </Link>
+          )}
+          {line && (
+            <Link href={line} aria-label="Line">
+              <Image src="/line.svg" alt="Line" width={35} height={35} />
+            </Link>
+          )}
         </div>
       </div>
 

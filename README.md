@@ -34,3 +34,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Command for Docker.
+```bash
+docker-compose up -d
+```
+
+## Command for Prisma.
+When have setup.
+```bash
+npm install prisma --save-dev
+# and
+npm install prisma/client
+```
+
+After setup succss.
+```bash
+npx prisma init
+```
+
+When you want migrate
+```bash
+npx prisma migrate dev --name "comment something."
+```
+
+

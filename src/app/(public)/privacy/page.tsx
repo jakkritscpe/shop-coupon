@@ -1,9 +1,7 @@
-import React from 'react'
+import ShowContent from "@/components/ui/show-content/show-content";
 
 const PrivacyPage = () => {
-  return (
-    <div>PrivacyPage</div>
-  )
-}
+  return <ShowContent name="นโยบายความเป็นส่วนตัว" tag="privacy" />;
+};
 
-export default PrivacyPage
+export default PrivacyPage;

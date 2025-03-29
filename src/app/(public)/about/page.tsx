@@ -1,9 +1,9 @@
-import React from 'react'
+import ShowContent from "@/components/ui/show-content/show-content";
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
-  )
-}
+    <ShowContent name="เกี่ยวกับเรา" tag="about" />
+  );
+};
 
-export default AboutPage
+export default AboutPage;

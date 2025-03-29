@@ -3,17 +3,18 @@ import type { z } from "zod";
 import Image from "next/image";
 import type { productSchema } from "@/lib/schema";
 import { ProductBuyForm } from "@/components/ui/product/product-buy-form";
-import { useCodeStore, useValidateCodeStore } from "@/store/codeStore";
+// import { useCodeStore, useValidateCodeStore } from "@/store/codeStore";
+import { useValidateCodeStore } from "@/store/codeStore";
 
 export function ProductListThumbnail({
   product,
 }: {
   product: z.infer<typeof productSchema>;
 }) {
-  const { code } = useCodeStore();
+  // const { code } = useCodeStore();
   const { validate } = useValidateCodeStore();
 
-  console.log(code, validate);
+  // console.log("Code: and Validate",code, validate);
 
   return (
     <div
