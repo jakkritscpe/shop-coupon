@@ -59,4 +59,9 @@ When you want migrate
 npx prisma migrate dev --name "comment something."
 ```
 
+Must run env.local 
+```bash
+npm install -D dotenv-cli
+npx dotenv -e .env.local -- prisma generate
+```
 
