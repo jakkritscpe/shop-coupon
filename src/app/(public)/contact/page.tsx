@@ -1,9 +1,7 @@
-import React from 'react'
+import ShowContent from "@/components/ui/show-content/show-content";
 
 const ContactPage = () => {
-  return (
-    <div>ContactPage</div>
-  )
-}
+  return <ShowContent name="ติดต่อเรา" tag="contact" />;
+};
 
-export default ContactPage
+export default ContactPage;

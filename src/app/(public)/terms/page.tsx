@@ -1,9 +1,7 @@
-import React from 'react'
+import ShowContent from "@/components/ui/show-content/show-content";
 
 const TermsPage = () => {
-  return (
-    <div>TermsPage</div>
-  )
+  return <ShowContent name="ข้อกำหนดการให้บริการ" tag="terms" />;
 }
 
 export default TermsPage
