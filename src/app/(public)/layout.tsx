@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import "../globals.css";
+import { getServerSession } from 'next-auth/next'
+import {SessionProvider} from '../components/SessionProvider'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +21,12 @@ export const metadata: Metadata = {
   description: "Welcome to my shop",
 };
 
-export default function PublicLayout({
+export default async function PublicLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession()
   return (
     <html lang="en">
       <body
@@ -31,7 +34,9 @@ export default function PublicLayout({
       >
         <Header />
         <main className="max-w-7xl my-8 mx-auto px-4 flex-grow w-full">
+        <SessionProvider session={session}>
           {children}
+          </SessionProvider>
         </main>
         <Footer />
       </body>

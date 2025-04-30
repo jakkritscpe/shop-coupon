@@ -1,17 +1,23 @@
-version: '3.8'
 services:
-  app:
+  shopecouponstripedaisyui:
+    image: shopecouponstripedaisyui
     build:
       context: .
-      dockerfile: Dockerfile
-    env_file:
-      - .env.local
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: 98E3B2CC28F61492C6934531C828C
+      DATABASE_URL: postgres://myuser:mypassword@postgres:5432/shop-coupon-db
     ports:
       - "3000:3000"
+    env_file:
+      - .env.local
     depends_on:
       - postgres
     networks:
       - app-network
+
   postgres:
     image: postgres:latest
     environment:
@@ -24,6 +30,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
+
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -35,8 +42,10 @@ services:
       - postgres
     networks:
       - app-network
+
 volumes:
   postgres-data:
+
 networks:
   app-network:
     driver: bridge
