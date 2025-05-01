@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { getServerSession } from 'next-auth/next'
 
-import {SessionProvider} from '../components/SessionProvider'
+import { SessionProvider } from '../components/SessionProvider'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +33,7 @@ export default async function AuthLayout({
       >
         <SessionProvider session={session}>
           {children}
-          </SessionProvider>
+        </SessionProvider>
       </body>
     </html>
   );
