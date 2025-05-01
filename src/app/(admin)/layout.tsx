@@ -24,19 +24,17 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans`} suppressHydrationWarning={true}>
-        <div className="flex flex-col md:flex-row min-h-screen">
-          {/* Sidebar - Fixed width on desktop */}
-          <div className="w-full md:w-64 lg:w-72 md:fixed md:left-0 md:top-0 md:h-screen">
-            <Sidebar />
-          </div>
-          {/* Main Content - Responsive spacing */}
-          <main className="flex-1 md:ml-64 lg:ml-72 p-4 md:p-6 lg:p-8" >
-            {children}
-          </main>
+    <>
+      <div className="flex flex-col md:flex-row min-h-screen">
+        {/* Sidebar - Fixed width on desktop */}
+        <div className="w-full md:w-64 lg:w-72 md:fixed md:left-0 md:top-0 md:h-screen">
+          <Sidebar />
         </div>
-      </body>
-    </html>
+        {/* Main Content - Responsive spacing */}
+        <main className="flex-1 md:ml-64 lg:ml-72 p-4 md:p-6 lg:p-8">
+          {children}
+        </main>
+      </div>
+    </>
   );
 }

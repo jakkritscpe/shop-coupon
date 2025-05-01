@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -36,18 +38,34 @@ const Header = () => {
               <Link href="/contact" className="hover:text-primary">
                 ติดต่อเรา
               </Link>
-            </li>
+            </li>{
+              session && (
+                <li>
+                  <Link href="/admin/edit/contact" className="hover:text-primary">
+                    แอดมิน
+                  </Link>
+                </li>
+              )
+            }
           </ul>
         </div>
 
-        {/* Right Section - CTA & Mobile Menu */}
+        {/* Right Section */}
         <div className="flex-none gap-2">
-          {/* Desktop CTA */}
-          {/* <button className="btn btn-primary hidden md:inline-flex">
-            เข้าสู่ระบบ
-          </button> */}
+          {/* 🔒 ปุ่มเข้าสู่ระบบ / ออกจากระบบ */}
+          {status !== "loading" && (
+            session ? (
+              <button className="btn btn-outline" onClick={() => signOut()}>
+                ออกจากระบบ
+              </button>
+            ) : (
+              <button className="btn btn-primary" onClick={() => signIn()}>
+                เข้าสู่ระบบ
+              </button>
+            )
+          )}
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu */}
           <div className="dropdown dropdown-end md:hidden">
             <button
               tabIndex={0}
@@ -93,6 +111,17 @@ const Header = () => {
                     ติดต่อเรา
                   </Link>
                 </li>
+                {session && (
+                  <li>
+                    <Link
+                      href="/admin/edit/contact"
+                      className="hover:text-primary"
+                      onClick={closeMenu}
+                    >
+                      แอดมิน
+                    </Link>
+                  </li>
+                )}
               </ul>
             )}
           </div>

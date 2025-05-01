@@ -127,6 +127,7 @@ const Setting = () => {
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
+              <input type="checkbox" defaultChecked className="checkbox" />
               <button className="btn btn-neutral flex items-center gap-2">
                 <Image src="/save.svg" alt="Save" width={18} height={18} />
                 <span>บันทึก</span>

@@ -11,8 +11,8 @@ const SignInPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  console.log('session', session);
-  console.log('status', status);
+  // console.log('session', session);
+  // console.log('status', status);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const SignInPage = () => {
               onClick={() => signOut({ callbackUrl: "/" })}
               className="btn btn-error w-full"
             >
-              Sign Out
+              เข้าสู่ระบบ
             </button>
           </div>
         ) : (
@@ -93,7 +93,7 @@ const SignInPage = () => {
               </button>
             </form>
 
-            <div className="divider">OR</div>
+            {/* <div className="divider">OR</div>
 
             <button
               onClick={() => signIn("google", { callbackUrl: "/", prompt: "select_account" })}
@@ -101,7 +101,7 @@ const SignInPage = () => {
             >
               <Image src="/google.svg" alt="Google" width={20} height={20} />
               Sign In with Google
-            </button>
+            </button> */}
           </>
         )}
       </div>
