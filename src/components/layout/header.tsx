@@ -55,11 +55,11 @@ const Header = () => {
           {/* 🔒 ปุ่มเข้าสู่ระบบ / ออกจากระบบ */}
           {status !== "loading" && (
             session ? (
-              <button className="btn btn-outline" onClick={() => signOut()}>
+              <button className="btn" onClick={() => signOut()}>
                 ออกจากระบบ
               </button>
             ) : (
-              <button className="btn btn-primary" onClick={() => signIn()}>
+              <button className="btn" onClick={() => signIn()}>
                 เข้าสู่ระบบ
               </button>
             )

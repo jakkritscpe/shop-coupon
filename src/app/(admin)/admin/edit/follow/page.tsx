@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import EditFollow from "@/components/ui/edit-follow/edit-follow";
 
 const EditFollowPage = () => {

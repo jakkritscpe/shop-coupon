@@ -15,7 +15,7 @@ export default async function RootLayout({
   const session = await getServerSession();
   return (
     <html>
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="antialiased flex flex-col min-h-screen">
         <>
           <SessionProvider session={session}>{children}</SessionProvider>
         </>

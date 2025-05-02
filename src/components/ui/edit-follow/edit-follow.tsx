@@ -23,7 +23,7 @@ const EditFollow = ({ name }: { name: string }) => {
     };
 
     fetchLinkContacts();
-  }, []);
+  }, [name]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

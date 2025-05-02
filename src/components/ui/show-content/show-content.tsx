@@ -5,7 +5,6 @@ import axios from "axios";
 
 const ShowContent = ({ name, tag }: { name: string; tag: string }) => {
   const [description, setDescription] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {

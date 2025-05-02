@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -88,7 +87,7 @@ const SignInPage = () => {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary w-full">
+              <button type="submit" className="btn text-gray w-full">
                 Sign In
               </button>
             </form>
