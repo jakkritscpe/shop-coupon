@@ -4,18 +4,15 @@ import type Stripe from "stripe"
 import axios from "axios"
 import { getOrigin } from "@/lib/utils";
 
-export async function getLimitItems(origin?: string) {
-  const response = await axios.get(`${origin}/api/config?name=limitItems`);
-
-  if (!response.data) {
-    return 0;
+export async function getLimitItems(origin?: string): Promise<number> {
+  try {
+    const response = await axios.get(`${origin}/api/config?name=limitItems`);
+    const value = response.data?.configs?.value;
+    return typeof value === "number" ? value : parseInt(value) || 0;
+  } catch (error: any) {
+    console.log("Error fetching limitItems:", error.message);
+    return 0; // คืนค่าเริ่มต้นเมื่อเกิดข้อผิดพลาด
   }
-
-  if (response.data.configs) {
-    return Number(response.data.configs.value);
-  }
-
-  return 0;
 }
 
 export async function getProducts(

@@ -23,11 +23,11 @@ export default async function PublicLayout({
 
   return (
     <>
-      <Header siteName={siteName} />
+      <Header siteName={siteName || null} />
       <main className="max-w-7xl my-8 mx-auto px-4 flex-grow w-full">
         <SessionProvider session={session}>{children}</SessionProvider>
       </main>
-      <Footer siteName={siteName} />
+      <Footer siteName={siteName || null} />
     </>
   );
 }

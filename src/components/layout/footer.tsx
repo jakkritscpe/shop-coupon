@@ -13,30 +13,35 @@ export default function Footer({ siteName }: { siteName?: string }) {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const res = await axios.get(`/api/link-contact`);
-        const linkContacts = res.data.linkContacts;
-
+        const res = await axios.get("/api/link-contact");
+        const linkContacts = res.data?.linkContacts;
+  
         if (!linkContacts) {
-          console.log("No content found");
+          console.warn("No linkContacts found in response.");
           return;
         }
-
+  
         linkContacts.forEach((item: { name: string; link: string }) => {
           if (item.name === "facebook") {
             setFacebook(item.link);
-          }
-          if (item.name === "instagram") {
+          } else if (item.name === "instagram") {
             setInstagram(item.link);
-          }
-          if (item.name === "line") {
+          } else if (item.name === "line") {
             setLine(item.link);
           }
         });
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        if (axios.isAxiosError(error)) {
+          console.log("Axios error fetching link-contact:", {
+            status: error.response?.status,
+            data: error.response?.data,
+          });
+        } else {
+          console.log("Unexpected error fetching link-contact:", error);
+        }
       }
     };
-
+  
     fetchConfig();
   }, []);
 
