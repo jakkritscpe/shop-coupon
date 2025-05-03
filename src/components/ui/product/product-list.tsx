@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useState } from "react";
 import {
   ProductListThumbnail,
@@ -9,10 +8,15 @@ import {
 import type { productListSchema } from "@/lib/schema";
 import type { z } from "zod";
 
-export function ProductList({list}: {list: z.infer<typeof productListSchema>}) {
-
+export function ProductList({
+  list,
+}: {
+  list: z.infer<typeof productListSchema>;
+}) {
   const [selectedFilter, setSelectedFilter] = useState<string>("");
-  const uniqueNames = Array.from(new Set(list.data.map(product => product.name)));
+  const uniqueNames = Array.from(
+    new Set(list.data.map((product) => product.name))
+  );
 
   const handleFilter = (name: string) => {
     setSelectedFilter(name);
@@ -23,8 +27,13 @@ export function ProductList({list}: {list: z.infer<typeof productListSchema>}) {
     <div className="relative mb-8 flex flex-col items-start gap-8">
       {list.data.length > 0 ? (
         <>
-          <form className="filter flex justify-start items-center w-full">
-            <input className="btn btn-sm rounded-full" type="reset" value="×" onClick={() => handleFilter("")} />
+          <form className="filter flex justify-start items-center w-full overflow-x-auto">
+            <input
+              className="btn btn-sm rounded-full"
+              type="reset"
+              value="×"
+              onClick={() => handleFilter("")}
+            />
             {uniqueNames.map((name) => (
               <input
                 className="btn btn-sm mx-1 my-0 rounded-full"
@@ -38,11 +47,12 @@ export function ProductList({list}: {list: z.infer<typeof productListSchema>}) {
           </form>
           <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {list.data
-              .filter(product => !selectedFilter || product.name === selectedFilter)
+              .filter(
+                (product) => !selectedFilter || product.name === selectedFilter
+              )
               .map((product) => (
                 <ProductListThumbnail key={product.id} product={product} />
-              ))
-            }
+              ))}
           </div>
           {/* <Button asChild size="sm" variant="outline">
             <Link href="#">View all products</Link>
