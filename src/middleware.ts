@@ -1,5 +1,5 @@
 import { getToken } from "next-auth/jwt";
-import { NextRequest,NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const user = await getToken({
@@ -7,15 +7,26 @@ export async function middleware(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  console.log('user', user);
-
   const { pathname } = request.nextUrl;
 
-  if (
-    pathname.startsWith('/admin') &&
-    (!user || user.role !== 'admin')
-  ) {
-    return NextResponse.redirect(new URL('/', request.url));
+  // ✅ Block ถ้า user ไม่มีสิทธิ์
+  if (pathname.startsWith("/admin") && (!user || user.role !== "admin")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // ✅ ตรวจสอบเฉพาะ path ที่อนุญาตไว้
+  const allowedPaths = [
+    "/admin/edit/contact",
+    "/admin/edit/about",
+    "/admin/edit/terms",
+    "/admin/edit/privacy",
+    "/admin/edit/follow",
+    "/admin/setting",
+  ];
+
+  const isAllowed = allowedPaths.some((path) => pathname.startsWith(path));
+  if (pathname.startsWith("/admin") && !isAllowed) {
+    return NextResponse.rewrite(new URL("/not-found", request.url)); // 👈 ตรงนี้สำคัญ
   }
 
   return NextResponse.next();

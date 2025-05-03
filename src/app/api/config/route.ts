@@ -56,9 +56,9 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
     try {
-        const { id, name, value } = await req.json();
+        const { name, value } = await req.json();
 
-        if (!id || !name || !value) {
+        if (!name || !value) {
             return NextResponse.json(
                 { error: "Missing required fields" },
                 { status: 400 }
@@ -66,9 +66,8 @@ export async function PUT(req: NextRequest) {
         }
 
         const config = await prisma.config.update({
-            where: { id },
+            where: { name },
             data: {
-                id,
                 name,
                 value,
             },

@@ -8,11 +8,12 @@ const Sidebar = () => {
   return (
     <div>
       <ul className="menu bg-base-100 w-100">
-        {/* <li>
-          <Link href="/admin/dashboard" className="hover:text-primary">
-            <Image src="/home.svg" alt="Line" width={18} height={18} /> แดชบอร์ด
+        <li>
+          <Link href="/" className="hover:text-primary">
+            <Image src="/home.svg" alt="Line" width={18} height={18} />
+            หน้าหลัก
           </Link>
-        </li> */}
+        </li>
         <li>
           <details open>
             <summary>
