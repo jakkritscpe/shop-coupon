@@ -40,7 +40,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/components/SessionProvider.tsx",
+    "src/components/SessionProvider.tsx",
     "next.config.js",
     "pages/**/*",
     "src/**/*"

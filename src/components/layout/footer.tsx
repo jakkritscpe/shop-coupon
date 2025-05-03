@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 
-export default function Footer() {
+export default function Footer({ siteName }: { siteName?: string }) {
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
   const [line, setLine] = useState("");
@@ -108,10 +108,10 @@ export default function Footer() {
       <div className="w-full mt-10 flex flex-col items-center">
         {/* <Image src="/logo.svg" alt="MyShop Logo" width={120} height={40} /> */}
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">MyShop</a>
+          <a className="btn btn-ghost text-xl">{ siteName || "MyShop" }</a>
         </div>
         <p className="text-sm text-gray-500 mt-2">
-          © {new Date().getFullYear()} MyShop. สงวนลิขสิทธิ์.
+          © {new Date().getFullYear()} { siteName || "MyShop" }. สงวนลิขสิทธิ์.
         </p>
       </div>
     </footer>

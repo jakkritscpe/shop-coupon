@@ -3,7 +3,6 @@ import type { z } from "zod";
 import Image from "next/image";
 import type { productSchema } from "@/lib/schema";
 import { ProductBuyForm } from "@/components/ui/product/product-buy-form";
-// import { useCodeStore, useValidateCodeStore } from "@/store/codeStore";
 import { useValidateCodeStore } from "@/store/codeStore";
 
 export function ProductListThumbnail({
@@ -11,15 +10,14 @@ export function ProductListThumbnail({
 }: {
   product: z.infer<typeof productSchema>;
 }) {
-  // const { code } = useCodeStore();
   const { validate } = useValidateCodeStore();
 
-  // console.log("Code: and Validate",code, validate);
+  const priceNumber = parseFloat(product.price.display_amount?.replace(/[^0-9.]/g, "") ?? "0");
 
   return (
     <div
       className={`card card-compact bg-base-100 shadow-xl transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 ${
-        !validate && "cursor-not-allowed"
+        (!validate || priceNumber < 10) && "cursor-not-allowed"
       }`}
     >
       <figure>
@@ -33,13 +31,13 @@ export function ProductListThumbnail({
       </figure>
 
       <div className="card-body">
-        <h2 className={`card-title ${ !validate && "text-gray-400" }`}>{product.name}</h2>
-        <p className={`text-muted-foreground mb-4 ${ !validate && "text-gray-400" }`}>{product.description}</p>
+        <h2 className={`card-title ${ !validate || priceNumber < 10 && "text-gray-400" }`}>{product.name}</h2>
+        <p className={`text-muted-foreground mb-4 ${ !validate || priceNumber < 10 && "text-gray-400" }`}>{product.description}</p>
         <div className="card-actions justify-between">
-          <p className={`text-muted-foreground ${ !validate && "text-gray-400" }`}>
+          <p className={`text-muted-foreground ${ !validate || priceNumber < 10 && "text-gray-400" }`}>
             {product.price.display_amount}
           </p>
-          <ProductBuyForm priceId={product.price.id} />
+          <ProductBuyForm priceId={product.price.id} priceDefualt={priceNumber} />
         </div>
       </div>
     </div>

@@ -15,7 +15,6 @@ const Setting = () => {
   const [checkboxStates, setCheckboxStates] = useState({
     promptpay: false,
     card: false,
-    paypal: false,
   });
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +53,6 @@ const Setting = () => {
               ...prevState,
               promptpay: paymentMethods.includes("promptpay"),
               card: paymentMethods.includes("card"),
-              paypal: paymentMethods.includes("paypal"),
             }));
           }
           if (item.name === "limitItems") {
@@ -113,9 +111,6 @@ const Setting = () => {
     }
     if (checkboxStates.card) {
       paymentMethod.push("card");
-    }
-    if (checkboxStates.paypal) {
-      paymentMethod.push("paypal");
     }
   
     return paymentMethod.join(",");
@@ -227,26 +222,9 @@ const Setting = () => {
                 </label>
               </div>
 
-              <div className="flex items-center gap-4">
-                <input
-                  type="checkbox"
-                  name="paypal"
-                  id="paypal"
-                  className="checkbox"
-                  checked={checkboxStates.paypal}
-                  onChange={handleCheckboxChange}
-                />
-                <label
-                  htmlFor="paypal"
-                  className="text-gray-700 cursor-pointer"
-                >
-                  PayPal
-                </label>
-              </div>
-
               <button
                 type="submit"
-                className="btn btn-neutral flex items-center ml-[45px]"
+                className="btn btn-neutral flex items-center ml-[150px]"
               >
                 <Image src="/save.svg" alt="Save" width={18} height={18} />
                 <span>บันทึก</span>

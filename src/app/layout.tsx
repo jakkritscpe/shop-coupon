@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
-import { SessionProvider } from "./components/SessionProvider";
-export const metadata: Metadata = {
-  title: "My App",
-  description: "My Cool App",
-};
+import { SessionProvider } from "@/components/SessionProvider";
 
 export default async function RootLayout({
   children,
@@ -13,6 +8,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
+
   return (
     <html>
       <body suppressHydrationWarning={true} className="antialiased flex flex-col min-h-screen">
