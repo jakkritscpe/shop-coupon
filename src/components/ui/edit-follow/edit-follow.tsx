@@ -33,7 +33,7 @@ const EditFollow = ({ name }: { name: string }) => {
     e.preventDefault();
 
     try {
-      if (followLink) {
+      if (!name) {
         await axios.post(`/api/link-contact`, {
           name,
           link: followLink,

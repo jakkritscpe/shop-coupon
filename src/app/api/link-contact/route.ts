@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const { id, link } = await req.json();
+    const { name, link } = await req.json();
 
     if (!link) {
       return NextResponse.json(
@@ -67,7 +67,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const content = await prisma.linkContact.update({
-      where: { id },
+      where: { name },
       data: {
         link,
       },
