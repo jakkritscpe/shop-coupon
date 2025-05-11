@@ -7,10 +7,12 @@ import axios from "axios";
 const EditFollow = ({ name }: { name: string }) => {
   const [followLink, setFollowLink] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(true); // ✅ loading state
 
   useEffect(() => {
     const fetchLinkContacts = async () => {
       try {
+        setLoading(true); // ⏳ เริ่มโหลด
         const res = await axios.get(`/api/link-contact?name=${name}`);
         if (!res.data.linkContact) {
           console.log("No content found");
@@ -19,6 +21,8 @@ const EditFollow = ({ name }: { name: string }) => {
         setFollowLink(res.data.linkContact.link);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false); // ✅ โหลดเสร็จ
       }
     };
 
@@ -41,7 +45,7 @@ const EditFollow = ({ name }: { name: string }) => {
         });
       }
 
-      setIsSuccess(true); 
+      setIsSuccess(true);
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
       console.error(error);
@@ -71,24 +75,32 @@ const EditFollow = ({ name }: { name: string }) => {
           <span>บันทึกสำเร็จ</span>
         </div>
       )}
-      <form onSubmit={handleSubmit}>
-        <label className="relative">
-          <span className="text text-gray-600 mb-1 block">{name}</span>
-          <div className="flex items-center gap-2">
-            <input
-              type="text"
-              placeholder={`https://${name}/your_pag`}
-              className="input input-bordered w-full max-w-md"
-              value={followLink || ""}
-              onChange={(e) => setFollowLink(e.target.value)}
-            />
-            <button className="btn btn-neutral flex items-center gap-2">
-              <Image src="/save.svg" alt="Save" width={18} height={18} />
-              <span>บันทึก</span>
-            </button>
-          </div>
-        </label>
-      </form>
+
+      {loading ? (
+        <div className="flex justify-center items-center w-full py-4 gap-3">
+          <span className="loading loading-ring loading-xl"></span>
+          <p className="text-base text-gray-600">กำลังโหลด...</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label className="relative">
+            <span className="text text-gray-600 mb-1 block">{name}</span>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder={`https://${name}/your_page`}
+                className="input input-bordered w-full max-w-md"
+                value={followLink || ""}
+                onChange={(e) => setFollowLink(e.target.value)}
+              />
+              <button className="btn btn-neutral flex items-center gap-2">
+                <Image src="/save.svg" alt="Save" width={18} height={18} />
+                <span>บันทึก</span>
+              </button>
+            </div>
+          </label>
+        </form>
+      )}
     </>
   );
 };
