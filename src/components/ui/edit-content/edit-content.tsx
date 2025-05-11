@@ -8,10 +8,12 @@ const EditContent = ({ name, tag }: { name: string; tag: string }) => {
   const [id, setId] = useState("");
   const [description, setDescription] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(true); // ✅ เพิ่ม loading state
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        setLoading(true); // เริ่มโหลด
         const res = await axios.get(`/api/content?tag=${tag}`);
         if (!res.data.content) {
           console.log("No content found");
@@ -22,6 +24,8 @@ const EditContent = ({ name, tag }: { name: string; tag: string }) => {
         setDescription(res.data.content.description);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false); // โหลดเสร็จ
       }
     };
 
@@ -47,9 +51,7 @@ const EditContent = ({ name, tag }: { name: string; tag: string }) => {
         });
       }
 
-      setIsSuccess(true); // ✅ แสดง modal สำเร็จ
-
-      // ✅ ซ่อน alert หลัง 3 วินาที
+      setIsSuccess(true);
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
       console.error(error);
@@ -70,19 +72,26 @@ const EditContent = ({ name, tag }: { name: string; tag: string }) => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit}>
-        <textarea
-          className="textarea textarea-bordered w-full resize-y"
-          placeholder="แก้ไขข้อมูล"
-          value={description}
-          rows={10}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        <button className="btn btn-neutral mt-2">
-          <Image src="/save.svg" alt="Line" width={18} height={18} />
-          บันทึก
-        </button>
-      </form>
+      {loading ? (
+        <div className="flex justify-center items-center w-full py-4 gap-3">
+          <span className="loading loading-ring loading-xl"></span>
+          <p className="text-base text-gray-600">กำลังโหลด...</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <textarea
+            className="textarea textarea-bordered w-full resize-y"
+            placeholder="แก้ไขข้อมูล"
+            value={description}
+            rows={10}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+          <button className="btn btn-neutral mt-2">
+            <Image src="/save.svg" alt="Line" width={18} height={18} />
+            บันทึก
+          </button>
+        </form>
+      )}
     </div>
   );
 };
