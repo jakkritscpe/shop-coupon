@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import Image from "next/image";
-import ClientCopyButton from "@/components/ui/client-copy/ ClientCopyButton";
+import ClientCopyButton from "@/components/ui/client-copy/ClientCopyButton";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-01-27.acacia",
@@ -10,11 +10,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export default async function PaymentSuccessPage({
   searchParams,
 }: {
-  searchParams: { session_id?: string };
+  searchParams: Promise<{ session_id?: string }>;
 }) {
-  const sessionId = searchParams.session_id;
+  const resolvedSearchParams = await searchParams;
+  const sessionId = resolvedSearchParams.session_id;
 
-  if (!sessionId) redirect("/");
+  if (!sessionId) {
+    redirect("/");
+    return null;
+  }
 
   let session;
   try {
@@ -22,12 +26,17 @@ export default async function PaymentSuccessPage({
   } catch (error) {
     console.error("Error retrieving session:", error);
     redirect("/");
+    return null;
   }
 
-  if (session.payment_status !== "paid") redirect("/");
+  if (session.payment_status !== "paid") {
+    redirect("/");
+    return null;
+  }
 
   const code = session.metadata?.code || "N/A";
-  const finalCode = String(Number(code) * 5);
+  const valueMultiple = 5;
+  const finalCode = String(Number(code) * valueMultiple);
 
   return (
     <div className="flex items-center justify-center h-screen">
