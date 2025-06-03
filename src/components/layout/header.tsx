@@ -53,13 +53,9 @@ const Header = ({ siteName }: { siteName?: string }) => {
         <div className="flex-none gap-2">
           {/* 🔒 ปุ่มเข้าสู่ระบบ / ออกจากระบบ */}
           {status !== "loading" &&
-            (session ? (
+            (session && (
               <button className="btn" onClick={() => signOut()}>
                 ออกจากระบบ
-              </button>
-            ) : (
-              <button className="btn" onClick={() => signIn()}>
-                เข้าสู่ระบบ
               </button>
             ))}
 

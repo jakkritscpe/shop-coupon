@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/sign-in", // 👈 ใช้หน้า login ของคุณเอง
+    signIn: "/coupon159", // 👈 ใช้หน้า login ของคุณเอง
   },
   adapter: PrismaAdapter(prisma),
   session: {
